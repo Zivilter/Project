@@ -511,9 +511,9 @@ namespace lib
             while (myRead())
             {
                 Console.Write("Название: ");
-                string name = Console.ReadLine();
+                string name = testNull();
                 Console.Write("Автор: ");
-                string author = Console.ReadLine();
+                string author =testNull();
                 Console.Write("Жанр: ");
                 string genre = Console.ReadLine();
                 Console.Write("Аннотация: ");
@@ -540,6 +540,18 @@ namespace lib
             if (r == "y" || r == "yes" || r == "Y" || r == "Yes" || r == "Да" || r == "да") return true;
             else return false;
         }
+
+        public static string testNull()
+        {
+            string r = Console.ReadLine();
+            while (r == "")
+            {
+                Console.WriteLine("Данное значение не может быть пустым. Введите еще раз: ");
+                r = Console.ReadLine();
+            }
+            return r;
+        }
+
 
 
 
