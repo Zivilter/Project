@@ -394,9 +394,16 @@ namespace lib
 
     class st_book : statistic
     {
+        public static void InfoHandler(string mes)
+        {
+            Console.WriteLine(mes);
+        }
 
         public void select()
         {
+            myEvent ev1 = new myEvent();
+            ev1.info += new Print(InfoHandler);
+
             XmlDocument Doc1 = new XmlDocument();
             Doc1.Load("card.xml");
             delete();
@@ -426,12 +433,12 @@ namespace lib
                             add();
                             f = false;
                         }
-
-                        
                     }
                 }
             }
+            ev1.myWrite();
         }
+
         public bool search(string crit)
         {
             XmlDocument Doc_s = new XmlDocument();
