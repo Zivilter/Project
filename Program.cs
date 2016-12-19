@@ -391,6 +391,33 @@ namespace lib
                 }
             }
         }
+        public bool search(string crit)
+        {
+            XmlDocument Doc_s = new XmlDocument();
+            Doc_s.Load("statistic.xml");
+            XmlElement Root = Doc_s.DocumentElement;
+            XmlNodeList Nodes = Root.SelectNodes("criterion");
+            foreach (XmlNode n in Nodes)
+            {
+                string cr = n.SelectSingleNode("@name").Value;
+                if (n.SelectSingleNode("@name").Value == crit)
+                {
+                    XmlNode h = n.SelectSingleNode("count");
+                    int c = Int32.Parse(h.InnerText) + 1;
+                    n.RemoveChild(h);
+                    XmlElement countElem = Doc_s.CreateElement("count");
+                    XmlText countText = Doc_s.CreateTextNode(c.ToString());
+                    countElem.AppendChild(countText);
+                    n.AppendChild(countElem);
+                    Doc_s.Save("statistic.xml");
+                    return true;
+                }
+                else return false;
+
+            }
+            return false;
+
+        }
 
 
 
