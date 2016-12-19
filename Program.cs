@@ -347,6 +347,11 @@ namespace lib
 
     class statistic : forlib
     {
+
+        public static void InfoHandler(string mes)
+        {
+            Console.WriteLine(mes);
+        }
         public string criterion;
         public int count;
 
@@ -394,10 +399,6 @@ namespace lib
 
     class st_book : statistic
     {
-        public static void InfoHandler(string mes)
-        {
-            Console.WriteLine(mes);
-        }
 
         public void select()
         {
@@ -475,6 +476,8 @@ namespace lib
     {
         public void select()
         {
+            myEvent ev1 = new myEvent();
+            ev1.info += new Print(InfoHandler);
             XmlDocument Doc = new XmlDocument();
             Doc.Load("card.xml");
             delete();
@@ -492,7 +495,10 @@ namespace lib
                 }
                 add();
             }
+            ev1.myWrite();
         }
+
+
 
     }
 
