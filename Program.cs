@@ -100,7 +100,47 @@ namespace lib
             this.year = year;
             this.publisher = publisher;
         }
-        public void add() { }
+        public void add()
+        {
+            XmlDocument Doc = new XmlDocument();
+            Doc.Load("book.xml");
+            XmlElement bRoot = Doc.DocumentElement;
+            // создаем новый элемент book
+            XmlElement bElem = Doc.CreateElement("book");
+            // создаем атрибут name
+            XmlAttribute nameAttr = Doc.CreateAttribute("name");
+            // создаем элементы
+            XmlElement authorElem = Doc.CreateElement("author");
+            XmlElement genreElem = Doc.CreateElement("genre");
+            XmlElement annotationeElem = Doc.CreateElement("annotation");
+            XmlElement yearElem = Doc.CreateElement("year");
+            XmlElement publisherElem = Doc.CreateElement("publisher");
+            // создаем текстовые значения для элементов и атрибута
+            XmlText nameText = Doc.CreateTextNode(this.name);
+            XmlText authorText = Doc.CreateTextNode(this.author);
+            XmlText genreText = Doc.CreateTextNode(this.genre);
+            XmlText annotationeText = Doc.CreateTextNode(this.annotation);
+            XmlText yearText = Doc.CreateTextNode(this.year.ToString());
+            XmlText publisherText = Doc.CreateTextNode(this.publisher);
+
+            //добавляем узлы
+            nameAttr.AppendChild(nameText);
+            authorElem.AppendChild(authorText);
+            genreElem.AppendChild(genreText);
+            annotationeElem.AppendChild(annotationeText);
+            yearElem.AppendChild(yearText);
+            publisherElem.AppendChild(publisherText);
+            bElem.Attributes.Append(nameAttr);
+            bElem.AppendChild(authorElem);
+            bElem.AppendChild(genreElem);
+            bElem.AppendChild(annotationeElem);
+            bElem.AppendChild(yearElem);
+            bElem.AppendChild(publisherElem);
+            bRoot.AppendChild(bElem);
+            Doc.Save("book.xml");
+
+        }
+
         public void delete() { }
     }
 
