@@ -720,7 +720,12 @@ namespace lib
                 c2.card_give(name_reader2, name_book2);
             }
 
-
+            Console.WriteLine("Хотите получить статистику по читателям? (y/n)");
+            if (test.myRead())
+            {
+                st_reader dw1 = new st_reader();
+                dw1.select();
+            }
 
 
         }
