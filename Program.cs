@@ -730,14 +730,7 @@ namespace lib
             if (test.myRead())
             {
                 Console.WriteLine("{0,15}  {1,20}", "Фамилия", "количество");
-                XmlDocument Doc = new XmlDocument();
-                Doc.Load("statistic.xml");
-                XmlElement cRoot = Doc.DocumentElement;
-                XmlNodeList cNodes = cRoot.SelectNodes("criterion");
-                foreach (XmlNode n in cNodes)
-                {
-                    Console.WriteLine("{0,15}  {1,5}", n.SelectSingleNode("@name").Value, n.InnerText);
-                }
+                St_Print();
 
             }
 
@@ -752,14 +745,7 @@ namespace lib
             if (test.myRead())
             {
                 Console.WriteLine("{0,15}  {1,20}", "Название", "количество");
-                XmlDocument Doc = new XmlDocument();
-                Doc.Load("statistic.xml");
-                XmlElement cRoot = Doc.DocumentElement;
-                XmlNodeList cNodes = cRoot.SelectNodes("criterion");
-                foreach (XmlNode n in cNodes)
-                {
-                    Console.WriteLine("{0,15}  {1,5}", n.SelectSingleNode("@name").Value, n.InnerText);
-                }
+                St_Print();
 
             }
 
@@ -770,7 +756,7 @@ namespace lib
         }
         
 
-        public void St_Print()
+        public static void St_Print()
         {
        XmlDocument Doc = new XmlDocument();
             Doc.Load("statistic.xml");
