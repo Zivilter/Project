@@ -224,7 +224,36 @@ namespace lib
             hand = "true";
         }
 
-        public void take() { }
+        public void take()
+        {
+            XmlDocument Doc = new XmlDocument();
+            Doc.Load("card.xml");
+            XmlElement cRoot = Doc.DocumentElement;
+            XmlNodeList cNodes = cRoot.SelectNodes("card");
+            XmlNode k = cRoot.FirstChild;
+            foreach (XmlNode n in cNodes)
+                if (n.SelectSingleNode("@fio").Value == this.people)
+                {
+                    k = n;
+                }
+
+            // создаем элементы
+            XmlElement booksElem = Doc.CreateElement("book");
+            XmlAttribute nameAttr = Doc.CreateAttribute("name");
+            XmlElement handElem = Doc.CreateElement("hand");
+            // создаем текстовые значения для элементов и атрибута
+            XmlText booksText = Doc.CreateTextNode(this.books);
+            XmlText handText = Doc.CreateTextNode(this.hand);
+            //добавляем узлы
+            nameAttr.AppendChild(booksText);
+            handElem.AppendChild(handText);
+            booksElem.Attributes.Append(nameAttr);
+            booksElem.AppendChild(handElem);
+            k.AppendChild(booksElem);
+            cRoot.AppendChild(k);
+            Doc.Save("card.xml");
+        }
+
         public void give() { }
     }
 
