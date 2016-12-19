@@ -289,6 +289,24 @@ namespace lib
 
         }
 
+        public void card_give(string r, string l)
+        {
+            if (!search_book(l))
+            {
+                Console.WriteLine("Эта книга не из нашей библиотеки. Принимать нне будем.");
+            }
+            else
+            {
+                if (!search_reader(r))
+                {
+                    Console.WriteLine("Читатель ошибся библиотекой. У нас он не зарегистрирован");
+                }
+
+                people = r;
+                books = l;
+            }
+            give();
+        }
 
         public void take()
         {
