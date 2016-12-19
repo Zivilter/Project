@@ -256,7 +256,14 @@ namespace lib
             books = l.name;
             hand = "true";
         }
-        public card(string r, string l) { }
+        public card(string r, string l) 
+        {
+            people = r;
+            books = l;
+            hand = "true";
+            take();
+
+        }
 
         public void take()
         {
