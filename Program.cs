@@ -7,6 +7,39 @@ using System.Xml;
 
 namespace lib
 {
+    public delegate void Print(string mes);
+    class myEvent
+    {
+        public event Print info;
+
+        protected void OnMyEvent(string mes)
+        {
+            if (info != null) info(mes);
+        }
+
+        public void myWrite()
+        {
+            OnMyEvent("Статистика сохранена в файл");
+        }
+
+    }
+    public static class EventSample
+    {
+        //Обработчик события
+        public static void MyEventHandler(string mes)
+        {
+            Console.WriteLine(mes);
+        }
+        public static void Test()
+        {
+            myEvent ev1 = new myEvent();
+            //Добавляем обработчик события
+            ev1.info += new Print(MyEventHandler);
+            //Вызываем метод, вызывающий событие
+            ev1.myWrite();
+        }
+    }
+
     public interface forlib
     {
         void add();
