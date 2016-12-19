@@ -276,8 +276,11 @@ namespace lib
 
                 people = r;
                 books = l;
+                hand = "false";
             }
-            give();
+            if (give()) Console.WriteLine("Книга принята. Запись изформуляра убрали.");
+            else Console.WriteLine("Книга отсутствует в формуляре. Принимать не будем");
+
         }
         public void take()
         {
@@ -335,8 +338,9 @@ namespace lib
                 Doc.Save("card.xml");
             }
         }
-        public void give()
+        public bool give()
         {
+            bool f=false;
             XmlDocument Doc = new XmlDocument();
             Doc.Load("card.xml");
             XmlElement cRoot = Doc.DocumentElement;
@@ -357,8 +361,10 @@ namespace lib
                             handElem.AppendChild(handText);
                             i.AppendChild(handElem);
                             Doc.Save("card.xml");
+                            f = true;
                         }
                 }
+            return (f);
         }
         public bool search_reader(string crit)
         {
@@ -662,20 +668,20 @@ namespace lib
             {
                 st_reader dw1 = new st_reader();
                 dw1.select();
+                Console.WriteLine();
+                Console.WriteLine("Хотите вывести статистику на экран? (y/n)");
+                if (test.myRead()) St_Print();
             }
-            Console.WriteLine();
-            Console.WriteLine("Хотите вывести статистику на экран? (y/n)");
-            if (test.myRead()) St_Print();
             Console.WriteLine();
             Console.WriteLine("Хотите получить статистику по книгам? (y/n)");
             if (test.myRead())
             {
                 st_book dw2 = new st_book();
                 dw2.select();
+                Console.WriteLine();
+                Console.WriteLine("Хотите вывести статистику на экран? (y/n)");
+                if (test.myRead()) St_Print();
             }
-            Console.WriteLine();
-            Console.WriteLine("Хотите вывести статистику на экран? (y/n)");
-            if (test.myRead()) St_Print();
         }
 
         public static void St_Print()
