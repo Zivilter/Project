@@ -735,7 +735,7 @@ namespace lib
                 XmlNodeList cNodes = cRoot.SelectNodes("criterion");
                 foreach (XmlNode n in cNodes)
                 {
-                    Console.WriteLine("{0:30}  {1:10}", n.SelectSingleNode("@name").Value, n.InnerText);
+                    Console.WriteLine("{0}  {1}", n.SelectSingleNode("@name").Value, n.InnerText);
                 }
 
             }
@@ -747,6 +747,20 @@ namespace lib
                 st_book dw2 = new st_book();
                 dw2.select();
             }
+            Console.WriteLine("Хотите вывести статистику на экран? (y/n)");
+            if (test.myRead())
+            {
+                XmlDocument Doc = new XmlDocument();
+                Doc.Load("statistic.xml");
+                XmlElement cRoot = Doc.DocumentElement;
+                XmlNodeList cNodes = cRoot.SelectNodes("criterion");
+                foreach (XmlNode n in cNodes)
+                {
+                    Console.WriteLine("{0}  {1}", n.SelectSingleNode("@name").Value, n.InnerText);
+                }
+
+            }
+
 
 
 
