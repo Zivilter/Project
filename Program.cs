@@ -256,6 +256,7 @@ namespace lib
             books = l.name;
             hand = "true";
         }
+        public card(string r, string l) { }
 
         public void take()
         {
@@ -547,6 +548,16 @@ namespace lib
                     j.add();
                     Console.WriteLine("Журнал добавлен. Хотите добавить еще один журнал?(y/n)");
                 }
+            }
+            Console.WriteLine();
+            Console.WriteLine("К вам пришел читатель и хочет взять книгу? (y/n)");
+            while (myRead())
+            {
+                Console.Write("ФИО читателя: ");
+                string name_reader = testNull();
+                Console.Write("Название книги ");
+                string name_book = testNull();
+                card c = new card(name_reader, name_book);
             }
 
 
