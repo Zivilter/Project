@@ -269,17 +269,18 @@ namespace lib
                 {
                     Console.WriteLine("Читатель пришел к вам в библиотеку в первый раз. Заполните формуляр на читателя");
 
-                    Console.Write("ФИО: " );
-                    string fio =  Console.ReadLine();
+                    Console.WriteLine("ФИО: " + r);
+                    string fio = r;
                     Console.Write("Адрес: ");
-                    string address = Console.ReadLine();
+                    string address = test.testNull();
                     Console.Write("Номер телефона: ");
-                    string telephone = Console.ReadLine();
+                    string telephone = test.testNull();
 
                     reader ch = new reader(fio, address, telephone);
                     ch.add();
                     Console.WriteLine("Читатель добавлен.");
                 }
+
                 people = r;
                 books = l;
                 hand = "true";
