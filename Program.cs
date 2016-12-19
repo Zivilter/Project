@@ -196,8 +196,17 @@ namespace lib
 
         }
 
+        public void delete()
+        {
+            XmlDocument Doc = new XmlDocument();
+            Doc.Load("reader.xml");
+            XmlElement rRoot = Doc.DocumentElement;
+            XmlNodeList rNodes = rRoot.SelectNodes("reader");
+            foreach (XmlNode n in rNodes)
+                if (n.SelectSingleNode("@fio").Value == this.fio) rRoot.RemoveChild(n);
+            Doc.Save("reader.xml");
+        }
 
-        public void delete() { }
 
     }
 
