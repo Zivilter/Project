@@ -519,10 +519,10 @@ namespace lib
                 Console.Write("Аннотация: ");
                 string annotation = Console.ReadLine();
                 Console.Write("Год издания: ");
-                string year = Console.ReadLine();
+                int year = testChar();
                 Console.Write("Издательство: ");
                 string publisher = Console.ReadLine();
-                book b = new book(name, author, genre, annotation, Int32.Parse(year), publisher);
+                book b = new book(name, author, genre, annotation, year, publisher);
                 b.add();
                 Console.WriteLine("Книга добавлена. Хотите добавить еще одну книгу?(y/n)");
             }
@@ -550,6 +550,18 @@ namespace lib
                 r = Console.ReadLine();
             }
             return r;
+        }
+
+        public static int testChar()
+        {
+            string r = Console.ReadLine();
+            int i = 0;
+            while (!Int32.TryParse(r, out i))
+            {
+                Console.WriteLine("Данное значение быть числом. Введите еще раз: ");
+                r = Console.ReadLine();
+            }
+            return i;
         }
 
 
