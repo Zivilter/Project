@@ -398,7 +398,27 @@ namespace lib
 
     class st_reader : statistic, forlib
     {
-        public void select() { }
+        public void select()
+        {
+            XmlDocument Doc = new XmlDocument();
+            Doc.Load("card.xml");
+            delete();
+
+            XmlElement cRoot = Doc.DocumentElement;
+            XmlNodeList cNodes = cRoot.SelectNodes("card");
+            foreach (XmlNode n in cNodes)
+            {
+                this.criterion = n.SelectSingleNode("@fio").Value;
+                this.count = 0;
+                XmlNodeList nNodes = n.SelectNodes("book");
+                foreach (XmlNode i in nNodes)
+                {
+                    this.count += 1;
+                }
+                add();
+            }
+        }
+
     }
 
 
