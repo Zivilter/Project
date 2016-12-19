@@ -507,6 +507,25 @@ namespace lib
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Вы хотите добавить книгу?(y/n)");
+            if (Console.ReadLine() == "y")
+            {
+                Console.Write("Название: ");
+                string name = Console.ReadLine();
+                Console.Write("Автор: ");
+                string author = Console.ReadLine();
+                Console.Write("Жанр: ");
+                string genre = Console.ReadLine();
+                Console.Write("Аннотация: ");
+                string annotation = Console.ReadLine();
+                Console.Write("Год издания: ");
+                string year = Console.ReadLine();
+                Console.Write("Издательство: ");
+                string publisher = Console.ReadLine();
+                book b = new book(name, author, genre, annotation, Int32.Parse(year), publisher);
+                b.add();
+            }
+
 
         }
 
