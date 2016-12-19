@@ -167,7 +167,35 @@ namespace lib
             this.address = address;
             this.telephone = telephone;
         }
-        public void add() { }
+        public void add()
+        {
+            XmlDocument Doc = new XmlDocument();
+            Doc.Load("reader.xml");
+            XmlElement rRoot = Doc.DocumentElement;
+            // создаем новый элемент reader
+            XmlElement rElem = Doc.CreateElement("reader");
+            // создаем атрибут name
+            XmlAttribute fioAttr = Doc.CreateAttribute("fio");
+            // создаем элементы
+            XmlElement addressElem = Doc.CreateElement("address");
+            XmlElement telephoneElem = Doc.CreateElement("telephone");
+            // создаем текстовые значения для элементов и атрибута
+            XmlText fioText = Doc.CreateTextNode(this.fio);
+            XmlText addressText = Doc.CreateTextNode(this.address);
+            XmlText telephoneText = Doc.CreateTextNode(this.telephone);
+
+            //добавляем узлы
+            fioAttr.AppendChild(fioText);
+            addressElem.AppendChild(addressText);
+            telephoneElem.AppendChild(telephoneText);
+            rElem.Attributes.Append(fioAttr);
+            rElem.AppendChild(addressElem);
+            rElem.AppendChild(telephoneElem);
+            rRoot.AppendChild(rElem);
+            Doc.Save("reader.xml");
+
+        }
+
 
         public void delete() { }
 
