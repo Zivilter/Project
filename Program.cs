@@ -36,7 +36,44 @@ namespace lib
             this.publisher = publisher;
         }
 
-        public void add() { }
+        public void add()
+        {
+
+            XmlDocument Doc = new XmlDocument();
+            Doc.Load("journal.xml");
+            XmlElement jRoot = Doc.DocumentElement;
+            // создаем новый элемент journal
+            XmlElement jElem = Doc.CreateElement("journal");
+            // создаем атрибут name
+            XmlAttribute nameAttr = Doc.CreateAttribute("name");
+            // создаем элементы
+            XmlElement numberElem = Doc.CreateElement("number");
+            XmlElement annotationeElem = Doc.CreateElement("annotation");
+            XmlElement yearElem = Doc.CreateElement("year");
+            XmlElement publisherElem = Doc.CreateElement("publisher");
+            // создаем текстовые значения для элементов и атрибута
+            XmlText nameText = Doc.CreateTextNode(this.name);
+            XmlText numberText = Doc.CreateTextNode(this.number.ToString());
+            XmlText annotationeText = Doc.CreateTextNode(this.annotation);
+            XmlText yearText = Doc.CreateTextNode(this.year.ToString());
+            XmlText publisherText = Doc.CreateTextNode(this.publisher);
+
+            //добавляем узлы
+            nameAttr.AppendChild(nameText);
+            numberElem.AppendChild(numberText);
+            annotationeElem.AppendChild(annotationeText);
+            yearElem.AppendChild(yearText);
+            publisherElem.AppendChild(publisherText);
+            jElem.Attributes.Append(nameAttr);
+            jElem.AppendChild(numberElem);
+            jElem.AppendChild(annotationeElem);
+            jElem.AppendChild(yearElem);
+            jElem.AppendChild(publisherElem);
+            jRoot.AppendChild(jElem);
+            Doc.Save("journal.xml");
+
+        }
+
 
 
         public void delete() { }
