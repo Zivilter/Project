@@ -141,7 +141,17 @@ namespace lib
 
         }
 
-        public void delete() { }
+        public void delete()
+        {
+            XmlDocument Doc = new XmlDocument();
+            Doc.Load("book.xml");
+            XmlElement bRoot = Doc.DocumentElement;
+            XmlNodeList bNodes = bRoot.SelectNodes("book");
+            foreach (XmlNode n in bNodes)
+                if (n.SelectSingleNode("@name").Value == this.name) bRoot.RemoveChild(n);
+            Doc.Save("book.xml");
+        }
+
     }
 
     class reader : forlib
