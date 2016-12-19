@@ -346,8 +346,17 @@ namespace lib
             Doc.Save("statistic.xml");
 
         }
+        public void delete()
+        {
+            XmlDocument Doc = new XmlDocument();
+            Doc.Load("statistic.xml");
+            XmlElement Root = Doc.DocumentElement;
+            XmlNodeList Nodes = Root.SelectNodes("criterion");
+            foreach (XmlNode n in Nodes)
+                Root.RemoveChild(n);
+            Doc.Save("statistic.xml");
+        }
 
-        public void delete() { }
     }
 
     class st_book : statistic
