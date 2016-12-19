@@ -362,7 +362,36 @@ namespace lib
     class st_book : statistic
     {
 
-        public void select() { }
+        public void select()
+        {
+            XmlDocument Doc1 = new XmlDocument();
+            Doc1.Load("card.xml");
+            delete();
+            bool f = true;
+            XmlElement cRoot = Doc1.DocumentElement;
+            XmlNodeList cNodes = cRoot.SelectNodes("card");
+            foreach (XmlNode n in cNodes)
+            {
+                XmlNodeList nNodes = n.SelectNodes("book");
+                foreach (XmlNode h in nNodes)
+                {
+                    string crit = h.SelectSingleNode("@name").Value;
+                    //Console.WriteLine(crit);
+                    if (f)
+                    {
+                        this.criterion = crit;
+                        this.count = 1;
+                        add();
+                        f = false;
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+            }
+        }
+
 
 
     }
