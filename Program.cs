@@ -729,13 +729,14 @@ namespace lib
             Console.WriteLine("Хотите вывести статистику на экран? (y/n)");
             if (test.myRead())
             {
+                Console.WriteLine("{0,15}  {1,20}", "Фамилия", "количество");
                 XmlDocument Doc = new XmlDocument();
                 Doc.Load("statistic.xml");
                 XmlElement cRoot = Doc.DocumentElement;
                 XmlNodeList cNodes = cRoot.SelectNodes("criterion");
                 foreach (XmlNode n in cNodes)
                 {
-                    Console.WriteLine("{0}  {1}", n.SelectSingleNode("@name").Value, n.InnerText);
+                    Console.WriteLine("{0,15}  {1,5}", n.SelectSingleNode("@name").Value, n.InnerText);
                 }
 
             }
