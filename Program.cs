@@ -729,7 +729,6 @@ namespace lib
             Console.WriteLine("Хотите вывести статистику на экран? (y/n)");
             if (test.myRead())
             {
-                Console.WriteLine("{0,15}  {1,20}", "Фамилия", "количество");
                 St_Print();
 
             }
@@ -744,7 +743,6 @@ namespace lib
             Console.WriteLine("Хотите вывести статистику на экран? (y/n)");
             if (test.myRead())
             {
-                Console.WriteLine("{0,15}  {1,20}", "Название", "количество");
                 St_Print();
 
             }
