@@ -528,6 +528,17 @@ namespace lib
 
 
         }
+        static bool myRead()
+        {
+            string r = Console.ReadLine();
+            while (r != "y" && r != "n" && r != "yes" && r != "no" && r != "Y" && r != "N" && r != "Yes" && r != "No" && r != "да" && r != "нет" && r != "Да" && r != "Нет")
+            {
+                Console.WriteLine("Уточите ваш ответ. y-Да/n-Нет");
+                r = Console.ReadLine();
+            }
+            if (r == "y" || r == "yes" || r == "Y" || r == "Yes" || r == "Да" || r == "да") return true;
+            else return false;
+        }
 
 
 
