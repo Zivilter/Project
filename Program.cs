@@ -527,6 +527,25 @@ namespace lib
                 Console.WriteLine("Книга добавлена. Хотите добавить еще одну книгу?(y/n)");
             }
 
+            Console.WriteLine("Вы хотите добавить журнал?(y/n)");
+            while (myRead())
+            {
+                Console.Write("Название: ");
+                string name = testNull();
+                Console.Write("Номер: ");
+                byte number = 4;
+                Console.Write("Аннотация: ");
+                string annotation = Console.ReadLine();
+                Console.Write("Год издания: ");
+                int year = testChar();
+                Console.Write("Издательство: ");
+                string publisher = Console.ReadLine();
+                journal j = new journal(name, number, annotation, year, publisher);
+                j.add();
+                Console.WriteLine("Журнал добавлен. Хотите добавить еще один журнал?(y/n)");
+            }
+
+
 
         }
         static bool myRead()
