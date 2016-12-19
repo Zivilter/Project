@@ -283,7 +283,33 @@ namespace lib
             }
         }
 
-        public void give() { }
+        public void give()
+        {
+            XmlDocument Doc = new XmlDocument();
+            Doc.Load("card.xml");
+            XmlElement cRoot = Doc.DocumentElement;
+            XmlNodeList cNodes = cRoot.SelectNodes("card");
+            //XmlNode k = cRoot.FirstChild;
+            foreach (XmlNode n in cNodes)
+                if (n.SelectSingleNode("@fio").Value == this.people)
+                {
+                    XmlNodeList nNodes = n.SelectNodes("book");
+                    foreach (XmlNode i in nNodes)
+                        if (i.SelectSingleNode("@name").Value == this.books)
+                        {
+                            XmlNode h = i.SelectSingleNode("hand");
+                            //h.RemoveChild()
+                            i.RemoveChild(h);
+                            XmlElement handElem = Doc.CreateElement("hand");
+                            XmlText handText = Doc.CreateTextNode("false");
+                            handElem.AppendChild(handText);
+                            i.AppendChild(handElem);
+                            Doc.Save("card.xml");
+                        }
+
+                }
+        }
+
     }
 
     class statistic : forlib
