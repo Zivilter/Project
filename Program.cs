@@ -74,9 +74,17 @@ namespace lib
 
         }
 
+        public void delete()
+        {
+            XmlDocument Doc = new XmlDocument();
+            Doc.Load("journal.xml");
+            XmlElement jRoot = Doc.DocumentElement;
+            XmlNodeList jNodes = jRoot.SelectNodes("journal");
+            foreach (XmlNode n in jNodes)
+                if (n.SelectSingleNode("@name").Value == this.name) jRoot.RemoveChild(n);
+            Doc.Save("journal.xml");
+        }
 
-
-        public void delete() { }
     }
 
     class book : lib, forlib
