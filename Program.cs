@@ -256,14 +256,38 @@ namespace lib
             books = l.name;
             hand = "true";
         }
-        public card(string r, string l) 
+        public card(string r, string l)
         {
-            people = r;
-            books = l;
-            hand = "true";
+            if (!search_book(l))
+            {
+                Console.WriteLine("Данной книги нет в нашей библиотеке.");
+                Console.ReadKey();
+            }
+            else
+            {
+                if (!search_reader(r))
+                {
+                    Console.WriteLine("Читатель пришел к вам в библиотеку в первый раз. Заполните формуляр на читателя");
+
+                    Console.Write("ФИО: " );
+                    string fio =  Console.ReadLine();
+                    Console.Write("Адрес: ");
+                    string address = Console.ReadLine();
+                    Console.Write("Номер телефона: ");
+                    string telephone = Console.ReadLine();
+
+                    reader ch = new reader(fio, address, telephone);
+                    ch.add();
+                    Console.WriteLine("Читатель добавлен.");
+                }
+                people = r;
+                books = l;
+                hand = "true";
+            }
             take();
 
         }
+
 
         public void take()
         {
