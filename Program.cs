@@ -751,6 +751,7 @@ namespace lib
             Console.WriteLine("Хотите вывести статистику на экран? (y/n)");
             if (test.myRead())
             {
+                Console.WriteLine("{0,15}  {1,20}", "Название", "количество");
                 XmlDocument Doc = new XmlDocument();
                 Doc.Load("statistic.xml");
                 XmlElement cRoot = Doc.DocumentElement;
