@@ -533,7 +533,7 @@ namespace lib
                 Console.Write("Название: ");
                 string name = testNull();
                 Console.Write("Номер: ");
-                byte number = 4;
+                byte number = testByte();
                 Console.Write("Аннотация: ");
                 string annotation = Console.ReadLine();
                 Console.Write("Год издания: ");
@@ -584,6 +584,17 @@ namespace lib
             return i;
         }
 
+        public static byte testByte()
+        {
+            string r = Console.ReadLine();
+            byte i = 0;
+            while (!Byte.TryParse(r, out i))
+            {
+                Console.WriteLine("Данное значение быть числом. Введите еще раз: ");
+                r = Console.ReadLine();
+            }
+            return i;
+        }
 
 
 
