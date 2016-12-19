@@ -584,68 +584,9 @@ namespace lib
 
     }
 
-
-    class Program
+    class test
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Библиотека начала работу.");
-            Console.WriteLine("Добавим новые книгу или журнал?(y/n)");
-            if (myRead())
-            {
-                Console.WriteLine("Вы хотите добавить книгу?(y/n)");
-                while (myRead())
-                {
-                    Console.Write("Название: ");
-                    string name = testNull();
-                    Console.Write("Автор: ");
-                    string author = testNull();
-                    Console.Write("Жанр: ");
-                    string genre = Console.ReadLine();
-                    Console.Write("Аннотация: ");
-                    string annotation = Console.ReadLine();
-                    Console.Write("Год издания: ");
-                    int year = testChar();
-                    Console.Write("Издательство: ");
-                    string publisher = Console.ReadLine();
-                    book b = new book(name, author, genre, annotation, year, publisher);
-                    b.add();
-                    Console.WriteLine("Книга добавлена. Хотите добавить еще одну книгу?(y/n)");
-                }
-                Console.WriteLine("Вы хотите добавить журнал?(y/n)");
-                while (myRead())
-                {
-                    Console.Write("Название: ");
-                    string name = testNull();
-                    Console.Write("Номер: ");
-                    byte number = testByte();
-                    Console.Write("Аннотация: ");
-                    string annotation = Console.ReadLine();
-                    Console.Write("Год издания: ");
-                    int year = testChar();
-                    Console.Write("Издательство: ");
-                    string publisher = Console.ReadLine();
-                    journal j = new journal(name, number, annotation, year, publisher);
-                    j.add();
-                    Console.WriteLine("Журнал добавлен. Хотите добавить еще один журнал?(y/n)");
-                }
-            }
-            Console.WriteLine();
-            Console.WriteLine("К вам пришел читатель и хочет взять книгу? (y/n)");
-            while (myRead())
-            {
-                Console.Write("ФИО читателя: ");
-                string name_reader = testNull();
-                Console.Write("Название книги ");
-                string name_book = testNull();
-                card c = new card(name_reader, name_book);
-            }
-
-
-
-
-        }
-        static bool myRead()
+        public static bool myRead()
         {
             string r = Console.ReadLine();
             while (r != "y" && r != "n" && r != "yes" && r != "no" && r != "Y" && r != "N" && r != "Yes" && r != "No" && r != "да" && r != "нет" && r != "Да" && r != "Нет")
@@ -692,6 +633,69 @@ namespace lib
             }
             return i;
         }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Библиотека начала работу.");
+            Console.WriteLine("Добавим новые книгу или журнал?(y/n)");
+            if (test.myRead())
+            {
+                Console.WriteLine("Вы хотите добавить книгу?(y/n)");
+                while (test.myRead())
+                {
+                    Console.Write("Название: ");
+                    string name = test.testNull();
+                    Console.Write("Автор: ");
+                    string author = test.testNull();
+                    Console.Write("Жанр: ");
+                    string genre = Console.ReadLine();
+                    Console.Write("Аннотация: ");
+                    string annotation = Console.ReadLine();
+                    Console.Write("Год издания: ");
+                    int year = test.testChar();
+                    Console.Write("Издательство: ");
+                    string publisher = Console.ReadLine();
+                    book b = new book(name, author, genre, annotation, year, publisher);
+                    b.add();
+                    Console.WriteLine("Книга добавлена. Хотите добавить еще одну книгу?(y/n)");
+                }
+                Console.WriteLine("Вы хотите добавить журнал?(y/n)");
+                while (test.myRead())
+                {
+                    Console.Write("Название: ");
+                    string name = test.testNull();
+                    Console.Write("Номер: ");
+                    byte number = test.testByte();
+                    Console.Write("Аннотация: ");
+                    string annotation = Console.ReadLine();
+                    Console.Write("Год издания: ");
+                    int year = test.testChar();
+                    Console.Write("Издательство: ");
+                    string publisher = Console.ReadLine();
+                    journal j = new journal(name, number, annotation, year, publisher);
+                    j.add();
+                    Console.WriteLine("Журнал добавлен. Хотите добавить еще один журнал?(y/n)");
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine("К вам пришел читатель и хочет взять книгу? (y/n)");
+            while (test.myRead())
+            {
+                Console.Write("ФИО читателя: ");
+                string name_reader = test.testNull();
+                Console.Write("Название книги ");
+                string name_book = test.testNull();
+                card c = new card(name_reader, name_book);
+            }
+
+
+
+
+        }
+        
 
 
 
