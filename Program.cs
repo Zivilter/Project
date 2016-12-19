@@ -508,7 +508,7 @@ namespace lib
         static void Main(string[] args)
         {
             Console.WriteLine("Вы хотите добавить книгу?(y/n)");
-            if (Console.ReadLine() == "y")
+            while (myRead())
             {
                 Console.Write("Название: ");
                 string name = Console.ReadLine();
@@ -524,6 +524,7 @@ namespace lib
                 string publisher = Console.ReadLine();
                 book b = new book(name, author, genre, annotation, Int32.Parse(year), publisher);
                 b.add();
+                Console.WriteLine("Книга добавлена. Хотите добавить еще одну книгу?(y/n)");
             }
 
 
