@@ -727,6 +727,15 @@ namespace lib
                 dw1.select();
             }
 
+            Console.WriteLine("Хотите получить статистику по книгам? (y/n)");
+            if (test.myRead())
+            {
+                st_book dw2 = new st_book();
+                dw2.select();
+            }
+
+
+
 
         }
         
