@@ -351,6 +351,21 @@ namespace lib
                 }
         }
 
+        public bool search_reader(string crit)
+        {
+            bool f = false;
+            XmlDocument Doc_s = new XmlDocument();
+            Doc_s.Load("reader.xml");
+            XmlElement Root = Doc_s.DocumentElement;
+            XmlNodeList Nodes = Root.SelectNodes("reader");
+            foreach (XmlNode n in Nodes)
+            {
+                if (n.SelectSingleNode("@fio").Value == crit) f = true;
+
+            }
+            return f;
+        }
+
     }
 
     class statistic : forlib
