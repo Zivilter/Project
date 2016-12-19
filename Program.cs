@@ -556,13 +556,15 @@ namespace lib
         {
             string r = Console.ReadLine();
             int i = 0;
-            while (!Int32.TryParse(r, out i))
+            while (!Int32.TryParse(r, out i) || (i < 1000 || i > 2016))
             {
-                Console.WriteLine("Данное значение быть числом. Введите еще раз: ");
+                if (!Int32.TryParse(r, out i)) Console.WriteLine("Данное значение быть числом. Введите еще раз: ");
+                else if (i < 1000 || i > 2016) Console.WriteLine("Значение введено некорректно. Введите еще раз: ");
                 r = Console.ReadLine();
             }
             return i;
         }
+
 
 
 
