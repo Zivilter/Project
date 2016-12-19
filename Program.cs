@@ -11,21 +11,17 @@ namespace lib
     class myEvent
     {
         public event Print info;
-
         protected void OnMyEvent(string mes)
         {
             if (info != null) info(mes);
         }
-
         public void myWrite()
         {
             OnMyEvent("Статистика сохранена в файл");
         }
-
     }
     public static class EventSample
     {
-        //Обработчик события
         public static void MyEventHandler(string mes)
         {
             Console.WriteLine(mes);
@@ -33,20 +29,15 @@ namespace lib
         public static void Test()
         {
             myEvent ev1 = new myEvent();
-            //Добавляем обработчик события
             ev1.info += new Print(MyEventHandler);
-            //Вызываем метод, вызывающий событие
             ev1.myWrite();
         }
     }
-
     public interface forlib
     {
         void add();
         void delete();
-
     }
-
     class lib
     {
         public string name;
@@ -54,9 +45,7 @@ namespace lib
         public int year;
         public string publisher;
         public lib() { }
-
     }
-
     class journal : lib, forlib
     {
         public byte number;
@@ -68,10 +57,8 @@ namespace lib
             this.year = year;
             this.publisher = publisher;
         }
-
         public void add()
         {
-
             XmlDocument Doc = new XmlDocument();
             Doc.Load("journal.xml");
             XmlElement jRoot = Doc.DocumentElement;
@@ -90,7 +77,6 @@ namespace lib
             XmlText annotationeText = Doc.CreateTextNode(this.annotation);
             XmlText yearText = Doc.CreateTextNode(this.year.ToString());
             XmlText publisherText = Doc.CreateTextNode(this.publisher);
-
             //добавляем узлы
             nameAttr.AppendChild(nameText);
             numberElem.AppendChild(numberText);
@@ -104,9 +90,7 @@ namespace lib
             jElem.AppendChild(publisherElem);
             jRoot.AppendChild(jElem);
             Doc.Save("journal.xml");
-
         }
-
         public void delete()
         {
             XmlDocument Doc = new XmlDocument();
@@ -119,7 +103,6 @@ namespace lib
         }
 
     }
-
     class book : lib, forlib
     {
         public string author;
@@ -155,7 +138,6 @@ namespace lib
             XmlText annotationeText = Doc.CreateTextNode(this.annotation);
             XmlText yearText = Doc.CreateTextNode(this.year.ToString());
             XmlText publisherText = Doc.CreateTextNode(this.publisher);
-
             //добавляем узлы
             nameAttr.AppendChild(nameText);
             authorElem.AppendChild(authorText);
@@ -171,9 +153,7 @@ namespace lib
             bElem.AppendChild(publisherElem);
             bRoot.AppendChild(bElem);
             Doc.Save("book.xml");
-
         }
-
         public void delete()
         {
             XmlDocument Doc = new XmlDocument();
@@ -184,9 +164,7 @@ namespace lib
                 if (n.SelectSingleNode("@name").Value == this.name) bRoot.RemoveChild(n);
             Doc.Save("book.xml");
         }
-
     }
-
     class reader : forlib
     {
         public string fio;
@@ -226,9 +204,7 @@ namespace lib
             rElem.AppendChild(telephoneElem);
             rRoot.AppendChild(rElem);
             Doc.Save("reader.xml");
-
         }
-
         public void delete()
         {
             XmlDocument Doc = new XmlDocument();
@@ -242,13 +218,11 @@ namespace lib
 
 
     }
-
     class card
     {
         public string people;
         public string books;
         public string hand;
-
         public card() { }
         public card(reader r, lib l)
         {
@@ -286,9 +260,7 @@ namespace lib
                 hand = "true";
             }
             take();
-
         }
-
         public void card_give(string r, string l)
         {
             if (!search_book(l))
@@ -307,7 +279,6 @@ namespace lib
             }
             give();
         }
-
         public void take()
         {
             XmlDocument Doc = new XmlDocument();
@@ -322,10 +293,8 @@ namespace lib
                     f = true;
                     k = n;
                 }
-
             if (f)
             {
-                // создаем элементы
                 XmlElement booksElem = Doc.CreateElement("book");
                 XmlAttribute nameAttr = Doc.CreateAttribute("name");
                 XmlElement handElem = Doc.CreateElement("hand");
@@ -366,7 +335,6 @@ namespace lib
                 Doc.Save("card.xml");
             }
         }
-
         public void give()
         {
             XmlDocument Doc = new XmlDocument();
@@ -390,10 +358,8 @@ namespace lib
                             i.AppendChild(handElem);
                             Doc.Save("card.xml");
                         }
-
                 }
         }
-
         public bool search_reader(string crit)
         {
             bool f = false;
@@ -404,7 +370,6 @@ namespace lib
             foreach (XmlNode n in Nodes)
             {
                 if (n.SelectSingleNode("@fio").Value == crit) f = true;
-
             }
             return f;
         }
@@ -419,9 +384,7 @@ namespace lib
             {
                 if (n.SelectSingleNode("@name").Value == crit)
                 {
-
                     f = true;
-
                 }
             }
             if (!f)
@@ -439,23 +402,16 @@ namespace lib
                 }
             }
             return f;
-
-
         }
-
-
     }
-
     class statistic : forlib
     {
-
         public static void InfoHandler(string mes)
         {
             Console.WriteLine(mes);
         }
         public string criterion;
         public int count;
-
         public statistic()
         {
             criterion = "";
@@ -483,7 +439,6 @@ namespace lib
             Elem.AppendChild(countElem);
             Root.AppendChild(Elem);
             Doc.Save("statistic.xml");
-
         }
         public void delete()
         {
@@ -495,17 +450,13 @@ namespace lib
                 Root.RemoveChild(n);
             Doc.Save("statistic.xml");
         }
-
     }
-
     class st_book : statistic
     {
-
         public void select()
         {
             myEvent ev1 = new myEvent();
             ev1.info += new Print(InfoHandler);
-
             XmlDocument Doc1 = new XmlDocument();
             Doc1.Load("card.xml");
             delete();
@@ -518,7 +469,6 @@ namespace lib
                 foreach (XmlNode h in nNodes)
                 {
                     string crit = h.SelectSingleNode("@name").Value;
-                    //Console.WriteLine(crit);
                     if (f)
                     {
                         this.criterion = crit;
@@ -563,16 +513,10 @@ namespace lib
                     return true;
                 }
                 else return false;
-
             }
             return false;
-
         }
-
-
-
     }
-
     class st_reader : statistic, forlib
     {
         public void select()
@@ -582,7 +526,6 @@ namespace lib
             XmlDocument Doc = new XmlDocument();
             Doc.Load("card.xml");
             delete();
-
             XmlElement cRoot = Doc.DocumentElement;
             XmlNodeList cNodes = cRoot.SelectNodes("card");
             foreach (XmlNode n in cNodes)
@@ -598,11 +541,7 @@ namespace lib
             }
             ev1.myWrite();
         }
-
-
-
     }
-
     class test
     {
         public static bool myRead()
@@ -616,7 +555,6 @@ namespace lib
             if (r == "y" || r == "yes" || r == "Y" || r == "Yes" || r == "Да" || r == "да") return true;
             else return false;
         }
-
         public static string testNull()
         {
             string r = Console.ReadLine();
@@ -627,7 +565,6 @@ namespace lib
             }
             return r;
         }
-
         public static int testChar()
         {
             string r = Console.ReadLine();
@@ -640,7 +577,6 @@ namespace lib
             }
             return i;
         }
-
         public static byte testByte()
         {
             string r = Console.ReadLine();
@@ -653,7 +589,6 @@ namespace lib
             return i;
         }
     }
-
     class Program
     {
         static void Main(string[] args)
@@ -681,6 +616,7 @@ namespace lib
                     b.add();
                     Console.WriteLine("Книга добавлена. Хотите добавить еще одну книгу?(y/n)");
                 }
+                Console.WriteLine();
                 Console.WriteLine("Вы хотите добавить журнал?(y/n)");
                 while (test.myRead())
                 {
@@ -701,7 +637,7 @@ namespace lib
             }
             Console.WriteLine();
             Console.WriteLine("К вам пришел читатель и хочет взять книгу? (y/n)");
-            while (test.myRead())
+            if (test.myRead())
             {
                 Console.Write("ФИО читателя: ");
                 string name_reader = test.testNull();
@@ -709,8 +645,9 @@ namespace lib
                 string name_book = test.testNull();
                 card c = new card(name_reader, name_book);
             }
+            Console.WriteLine();
             Console.WriteLine("К вам пришел читатель и хочет сдать книгу? (y/n)");
-            while (test.myRead())
+            if (test.myRead())
             {
                 Console.Write("ФИО читателя: ");
                 string name_reader2 = test.testNull();
@@ -719,44 +656,31 @@ namespace lib
                 card c2 = new card();
                 c2.card_give(name_reader2, name_book2);
             }
-
+            Console.WriteLine();
             Console.WriteLine("Хотите получить статистику по читателям? (y/n)");
             if (test.myRead())
             {
                 st_reader dw1 = new st_reader();
                 dw1.select();
             }
+            Console.WriteLine();
             Console.WriteLine("Хотите вывести статистику на экран? (y/n)");
-            if (test.myRead())
-            {
-                St_Print();
-
-            }
-
-
+            if (test.myRead()) St_Print();
+            Console.WriteLine();
             Console.WriteLine("Хотите получить статистику по книгам? (y/n)");
             if (test.myRead())
             {
                 st_book dw2 = new st_book();
                 dw2.select();
             }
+            Console.WriteLine();
             Console.WriteLine("Хотите вывести статистику на экран? (y/n)");
-            if (test.myRead())
-            {
-                St_Print();
-
-            }
-
-            
-
-
-
+            if (test.myRead()) St_Print();
         }
-        
 
         public static void St_Print()
         {
-       XmlDocument Doc = new XmlDocument();
+            XmlDocument Doc = new XmlDocument();
             Doc.Load("statistic.xml");
             XmlElement cRoot = Doc.DocumentElement;
             XmlNodeList cNodes = cRoot.SelectNodes("criterion");
@@ -765,11 +689,7 @@ namespace lib
                 Console.WriteLine("{0}  {1}", n.SelectSingleNode("@name").Value, n.InnerText);
             }
         }
-
-
     }
-
-
 }
 
 
