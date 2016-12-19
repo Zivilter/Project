@@ -709,6 +709,16 @@ namespace lib
                 string name_book = test.testNull();
                 card c = new card(name_reader, name_book);
             }
+            Console.WriteLine("К вам пришел читатель и хочет сдать книгу? (y/n)");
+            while (test.myRead())
+            {
+                Console.Write("ФИО читателя: ");
+                string name_reader2 = test.testNull();
+                Console.Write("Название книги ");
+                string name_book2 = test.testNull();
+                card c2 = new card();
+                c2.card_give(name_reader2, name_book2);
+            }
 
 
 
