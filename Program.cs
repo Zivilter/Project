@@ -386,6 +386,14 @@ namespace lib
                     }
                     else
                     {
+                        if (!search(crit))
+                        {
+                            this.criterion = crit;
+                            this.count = 1;
+                            add();
+                            f = false;
+                        }
+
                         
                     }
                 }
