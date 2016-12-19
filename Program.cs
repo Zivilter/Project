@@ -231,27 +231,56 @@ namespace lib
             XmlElement cRoot = Doc.DocumentElement;
             XmlNodeList cNodes = cRoot.SelectNodes("card");
             XmlNode k = cRoot.FirstChild;
+            bool f = false;
             foreach (XmlNode n in cNodes)
                 if (n.SelectSingleNode("@fio").Value == this.people)
                 {
+                    f = true;
                     k = n;
                 }
 
-            // создаем элементы
-            XmlElement booksElem = Doc.CreateElement("book");
-            XmlAttribute nameAttr = Doc.CreateAttribute("name");
-            XmlElement handElem = Doc.CreateElement("hand");
-            // создаем текстовые значения для элементов и атрибута
-            XmlText booksText = Doc.CreateTextNode(this.books);
-            XmlText handText = Doc.CreateTextNode(this.hand);
-            //добавляем узлы
-            nameAttr.AppendChild(booksText);
-            handElem.AppendChild(handText);
-            booksElem.Attributes.Append(nameAttr);
-            booksElem.AppendChild(handElem);
-            k.AppendChild(booksElem);
-            cRoot.AppendChild(k);
-            Doc.Save("card.xml");
+            if (f)
+            {
+                // создаем элементы
+                XmlElement booksElem = Doc.CreateElement("book");
+                XmlAttribute nameAttr = Doc.CreateAttribute("name");
+                XmlElement handElem = Doc.CreateElement("hand");
+                // создаем текстовые значения для элементов и атрибута
+                XmlText booksText = Doc.CreateTextNode(this.books);
+                XmlText handText = Doc.CreateTextNode(this.hand);
+                //добавляем узлы
+                nameAttr.AppendChild(booksText);
+                handElem.AppendChild(handText);
+                booksElem.Attributes.Append(nameAttr);
+                booksElem.AppendChild(handElem);
+                k.AppendChild(booksElem);
+                cRoot.AppendChild(k);
+                Doc.Save("card.xml");
+            }
+            else
+            {
+                XmlElement cElem = Doc.CreateElement("card");
+                // создаем атрибут name
+                XmlAttribute peopleAttr = Doc.CreateAttribute("fio");
+                // создаем элементы
+                XmlElement booksElem = Doc.CreateElement("book");
+                XmlAttribute nameAttr = Doc.CreateAttribute("name");
+                XmlElement handElem = Doc.CreateElement("hand");
+                // создаем текстовые значения для элементов и атрибута
+                XmlText peopleText = Doc.CreateTextNode(this.people);
+                XmlText booksText = Doc.CreateTextNode(this.books);
+                XmlText handText = Doc.CreateTextNode(this.hand);
+                //добавляем узлы
+                peopleAttr.AppendChild(peopleText);
+                nameAttr.AppendChild(booksText);
+                handElem.AppendChild(handText);
+                cElem.Attributes.Append(peopleAttr);
+                booksElem.Attributes.Append(nameAttr);
+                booksElem.AppendChild(handElem);
+                cElem.AppendChild(booksElem);
+                cRoot.AppendChild(cElem);
+                Doc.Save("card.xml");
+            }
         }
 
         public void give() { }
