@@ -365,6 +365,27 @@ namespace lib
             }
             return f;
         }
+        public bool search_book(string crit)
+        {
+            bool f = false;
+            XmlDocument Doc_s = new XmlDocument();
+            Doc_s.Load("book.xml");
+            XmlElement Root = Doc_s.DocumentElement;
+            XmlNodeList Nodes = Root.SelectNodes("book");
+            foreach (XmlNode n in Nodes)
+            {
+                if (n.SelectSingleNode("@name").Value == crit)
+                {
+
+                    f = true;
+
+                }
+            }
+            return f;
+
+
+        }
+
 
     }
 
