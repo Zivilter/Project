@@ -322,7 +322,31 @@ namespace lib
             criterion = "";
             count = 0;
         }
-        public void add() { }
+        public void add()
+        {
+            XmlDocument Doc = new XmlDocument();
+            Doc.Load("statistic.xml");
+            XmlElement Root = Doc.DocumentElement;
+            // создаем новый элемент book
+            XmlElement Elem = Doc.CreateElement("criterion");
+            // создаем атрибут name
+            XmlAttribute nameAttr = Doc.CreateAttribute("name");
+            // создаем элементы
+            XmlElement countElem = Doc.CreateElement("count");
+            // создаем текстовые значения для элементов и атрибута
+            XmlText nameText = Doc.CreateTextNode(this.criterion);
+            XmlText countText = Doc.CreateTextNode(this.count.ToString());
+
+            //добавляем узлы
+            nameAttr.AppendChild(nameText);
+            countElem.AppendChild(countText);
+            Elem.Attributes.Append(nameAttr);
+            Elem.AppendChild(countElem);
+            Root.AppendChild(Elem);
+            Doc.Save("statistic.xml");
+
+        }
+
         public void delete() { }
     }
 
