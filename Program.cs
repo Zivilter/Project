@@ -381,6 +381,20 @@ namespace lib
 
                 }
             }
+            if (!f)
+            {
+                XmlDocument Doc_j = new XmlDocument();
+                Doc_j.Load("journal.xml");
+                XmlElement jRoot = Doc_j.DocumentElement;
+                XmlNodeList jNodes = jRoot.SelectNodes("journal");
+                foreach (XmlNode n2 in jNodes)
+                {
+                    if (n2.SelectSingleNode("@name").Value == crit)
+                    {
+                        f = true;
+                    }
+                }
+            }
             return f;
 
 
